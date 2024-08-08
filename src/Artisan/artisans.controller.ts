@@ -1,6 +1,6 @@
 // src/artisans/artisans.controller.ts
 
-import { Body, Controller, Get, NotFoundException, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, NotFoundException, Param, Post, Query } from '@nestjs/common';
 import { ArtisansService } from './artisans.service';
 import { CreateArtisanDto } from './dto/create-artisan.dto';
 
@@ -30,5 +30,11 @@ export class ArtisansController {
             throw new NotFoundException('Artisan non trouvé');
         }
         return { artisanId: artisan };
+    }
+
+    @Get('check-email')
+    async checkEmail(@Query('email') email: string): Promise<{ exists: boolean }> {
+      const client = await this.artisansService.findByEmail(email);
+      return { exists: !!client };
     }
 }

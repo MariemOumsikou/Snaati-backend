@@ -5,8 +5,6 @@ export type ArtisanDocument = Artisan & Document;
 
 @Schema()
 export class Artisan {
-  @Prop()
-  _id: string;
   @Prop({ required: true })
   username: string;
 
@@ -21,6 +19,7 @@ export class Artisan {
 
   @Prop({ required: true })
   activityDescription: string;
+    _id: any;
 }
 
 export const ArtisanSchema = SchemaFactory.createForClass(Artisan);

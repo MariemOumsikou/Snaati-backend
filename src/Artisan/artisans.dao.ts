@@ -22,4 +22,8 @@ export class ArtisansDao {
     async findByUsername(username: string): Promise<Artisan | null> {
         return this.artisanModel.findOne({ username }).exec();
     }
+
+    async findByEmail(email: string): Promise<Artisan | null> {
+        return this.artisanModel.findOne({ email }).exec();
+    }
 }
