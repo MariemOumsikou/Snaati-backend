@@ -36,4 +36,13 @@ export class ProductsController {
   async getProductsByArtisanId(@Param('artisanId') artisanId: string): Promise<Product[]> {
     return this.productsService.findByArtisanId(artisanId);
   }
+
+    // Endpoint to get products by subcategory
+    @Get('subcategory/:subcategory')
+    async getProductsBySubcategory(
+      @Param('subcategory') subcategory: string
+    ): Promise<Product[]> {
+      return this.productsService.findBySubcategory(subcategory);
+    }
+    
 }

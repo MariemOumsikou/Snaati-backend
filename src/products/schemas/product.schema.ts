@@ -6,6 +6,7 @@ export interface Product extends Document {
   description: string;
   price: number;
   category: string;
+  subcategory: string,
   imageURL: string;
   artisanId: string;
   isPromotion?: boolean;
@@ -19,6 +20,7 @@ export const ProductSchema = new Schema({
   description: { type: String, required: true },
   price: { type: Number, required: true },
   category: { type: String, required: true },
+  subcategory: { type: String, required: true },
   imageURL: { type: String, required: true },
   artisanId: { type: String, required: true },
   isPromotion: { type: Boolean},

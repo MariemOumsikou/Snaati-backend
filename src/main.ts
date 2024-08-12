@@ -8,7 +8,7 @@ async function bootstrap() {
   
   // Configuration des CORS
   app.enableCors({
-    origin: 'https://snaati-frontend.onrender.com', // URL du frontend
+    origin: 'http://localhost:3001', // URL du frontend
     methods: 'GET,POST,PUT,DELETE',
     allowedHeaders: 'Content-Type',
   });

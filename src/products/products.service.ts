@@ -49,4 +49,8 @@ export class ProductsService {
     }
     return products;
   }
+
+  async findBySubcategory(subcategory: string): Promise<Product[]> {
+    return this.productModel.find({ subcategory }).exec();
+  }
 }
