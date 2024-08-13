@@ -1,21 +1,16 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Post, Param } from '@nestjs/common';
 import { CommentsService } from './comments.service';
+import { CreateCommentDto } from './dto/create-comment.dto';
 
-@Controller('comments')
+@Controller('products/:productId/comments')
 export class CommentsController {
   constructor(private readonly commentsService: CommentsService) {}
 
   @Post()
-  async addComment(
-    @Body('productId') productId: string,
-    @Body('userId') userId: string,
-    @Body('text') text: string,
+  async createComment(
+    @Param('productId') productId: string,
+    @Body() createCommentDto: CreateCommentDto
   ) {
-    return this.commentsService.addComment(productId, userId, text);
-  }
-
-  @Get(':productId')
-  async getCommentsForProduct(@Param('productId') productId: string) {
-    return this.commentsService.getCommentsForProduct(productId);
+    return this.commentsService.createComment(productId, createCommentDto);
   }
 }

@@ -13,6 +13,11 @@ export class ProductsController {
     return this.productsService.findAll();
   }
 
+  @Get()
+  async search(@Query('search') search: string): Promise<Product[]> {
+    return this.productsService.searchProducts(search);
+  }
+
   // Endpoint to get products by category and optional subcategory
   @Get('category/:category')
   async getProductsByCategory(

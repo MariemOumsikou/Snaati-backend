@@ -53,4 +53,11 @@ export class ProductsService {
   async findBySubcategory(subcategory: string): Promise<Product[]> {
     return this.productModel.find({ subcategory }).exec();
   }
+
+  async searchProducts(query: string): Promise<Product[]> {
+    if (!query) return [];
+    return this.productModel.find({
+      title: { $regex: query, $options: 'i' } // Recherche insensible à la casse
+    }).exec();
+  }
 }
