@@ -1,15 +1,20 @@
-import { Schema, Document } from 'mongoose';
+// schemas/comment.schema.ts
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 
-export interface Comment extends Document {
+@Schema()
+export class Comment extends Document {
+  @Prop({ required: true })
   productId: string;
-  clientId: string;
+
+  @Prop({ required: true })
+  clientEmail: string;
+
+  @Prop({ required: true })
   text: string;
-  createdAt: Date;
+
+  @Prop({ required: true })
+  date: Date;
 }
 
-export const CommentSchema = new Schema({
-  productId: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
-  clientId: { type: Schema.Types.ObjectId, ref: 'Client', required: true },
-  text: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now },
-});
+export const CommentSchema = SchemaFactory.createForClass(Comment);

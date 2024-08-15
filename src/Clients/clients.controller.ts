@@ -33,9 +33,13 @@ export class ClientsController {
         return { ClientId: clientId };
     }
 
-    @Get('check-email')
-    async checkEmail(@Query('email') email: string): Promise<{ exists: boolean }> {
-      const client = await this.clientsService.findByEmail(email);
-      return { exists: !!client };
+    @Get()
+    async findByEmail(@Query('email') email: string) {
+      return this.clientsService.findByEmail(email);
+    }
+    @Get('name')
+    async getClientName(@Query('email') email: string): Promise<{ name: string | null }> {
+        const name = await this.clientsService.getClientNameByEmail(email);
+        return { name };
     }
 }

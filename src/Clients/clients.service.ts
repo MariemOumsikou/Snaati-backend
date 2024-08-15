@@ -1,7 +1,9 @@
+// src/clients/clients.service.ts
+
 import { Injectable } from '@nestjs/common';
 import { ClientsDao } from './clients.dao';
 import { CreateClientDto } from './dto/create-client.dto';
-import { Client } from './schemas/client.schema';
+import { Client, ClientDocument } from './schemas/client.schema';
 
 @Injectable()
 export class ClientsService {
@@ -24,7 +26,8 @@ export class ClientsService {
             return { success: false, message: 'Utilisateur non trouvé' };
         }
 
-        // Vérifier le mot de passe haché ici si vous utilisez bcrypt ou une autre méthode de hachage
+        // Vérifiez le mot de passe haché ici
+        // Remplacez ceci par une comparaison de mot de passe sécurisée avec bcrypt ou une autre méthode
         if (client.password !== password) {
             return { success: false, message: 'Mot de passe incorrect' };
         }
@@ -37,7 +40,12 @@ export class ClientsService {
         return client ? client._id.toString() : null;
     }
 
-    async findByEmail(email: string): Promise<Client | null> {
+    async findByEmail(email: string): Promise<ClientDocument | null> {
         return this.clientsDao.findByEmail(email);
+    }
+
+    async getClientNameByEmail(email: string): Promise<string | null> {
+        const client = await this.clientsDao.findByEmail(email);
+        return client ? client.username : null;  // ou `client.name` si vous stockez le nom sous un autre champ
     }
 }
