@@ -9,7 +9,7 @@ import { ProductsModule } from './products/products.module';
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
 import { CommentsModule } from './comments/comments.module';
-import { OrdersModule } from './orders/orders.module';
+import { OrdersModule } from './Orders/orders.module';
 
 @Module({
   imports: [
